@@ -19,21 +19,44 @@ def main(page: ft.Page):
 
 
     def task_created(e):
-        if not name_of_task.value.strip() and selected_deadline is None:
-            error.value = "Введи назву задачі і вибери дедлайн"
-            
-            page.update()
-            return
+        no_name = not name_of_task.value.strip()
+        no_deadline = selected_deadline is None
+        no_priority = priority.value is None
+        
+        match (no_name, no_deadline, no_priority):
 
-        elif selected_deadline is None:
-            error.value = "Спочатку вибери дедлайн"
-            page.update()
-            return
-            
-        elif not name_of_task.value.strip():
-            error.value = "Введи назву задачі"
-            page.update()
-            return
+            case (True, True, True):
+                error.value = "Введи назву задачі, вибери дедлайн та пріоритет"
+                return
+
+            case (True, True, False):
+                error.value = "Введи назву задачі та вибери дедлайн"
+                return
+
+            case (True, False, True):
+                error.value = "Введи назву задачі та вибери пріоритет"
+                return
+
+            case (False, True, True):
+                error.value = "Вибери дедлайн та пріоритет"
+                return
+
+            case (True, False, False):
+                error.value = "Введи назву задачі"
+                return
+
+            case (False, True, False):
+                error.value = "Вибери дедлайн"
+                return
+
+            case (False, False, True):
+                error.value = "Вибери пріоритет"
+                return
+
+            case (False, False, False):
+                error.value = ""
+                page.update()
+
         
         error.value = "Завдання Успішно створено!"
         error.color = "green"
@@ -54,12 +77,23 @@ def main(page: ft.Page):
 
     pick_btn = ft.ElevatedButton("Вибрати дедлайн", on_click=open_picker)
     create_btn = ft.ElevatedButton("Створити задачу", on_click=task_created)
+    priority = ft.Dropdown(
+        options=[
+            ft.dropdown.Option("P3"),
+            ft.dropdown.Option("P2"),
+            ft.dropdown.Option("P1"),
+        ],
+        label="Пріоритет"
+
+
+    )
     error = ft.Text("", color="red")
     
 
     page.add(
         name_of_task,
         pick_btn,
+        priority,
         create_btn,
         error,
     )
