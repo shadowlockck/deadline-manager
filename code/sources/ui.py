@@ -1,5 +1,6 @@
 import flet as ft
 import datetime
+import sources.tasks as tasks
 
 
 def main(page: ft.Page):
@@ -60,6 +61,8 @@ def main(page: ft.Page):
         
         error.value = "Завдання Успішно створено!"
         error.color = "green"
+
+        tasks.create_task(name_of_task.value, selected_deadline.strftime("%Y-%m-%d"), priority.value)
         
 
 

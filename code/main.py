@@ -1,4 +1,5 @@
 import flet as ft
-from sources.ui import main
+from sources import *
 
-ft.run(main)
+if __name__ == "__main__":
+    ft.app(main)
