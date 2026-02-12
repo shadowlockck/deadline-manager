@@ -51,7 +51,7 @@ def main(page: ft.Page):
         no_name = not name_of_task.value.strip()
         no_deadline = selected_deadline is None
         no_priority = priority.value is None
-        
+          
         match (no_name, no_deadline, no_priority):
 
             case (True, True, True):
