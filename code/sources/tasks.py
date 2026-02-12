@@ -4,7 +4,7 @@ import flet as ft
 
 def import_db():
     try:
-        with open("code/data/task.json", "r", encoding="utf-8") as f:
+        with open("data/task.json", "r", encoding="utf-8") as f:
             db = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         db = []
@@ -14,7 +14,7 @@ def import_db():
 def save_db(db):
     os.makedirs("data", exist_ok=True)
 
-    with open("code/data/task.json", "w", encoding="utf-8") as f:
+    with open("data/task.json", "w", encoding="utf-8") as f:
         json.dump(db, f, ensure_ascii=False, indent=4)
 
 

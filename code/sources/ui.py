@@ -89,7 +89,7 @@ def main(page: ft.Page):
                 page.update()
 
         
-        error.value = "Завдання Успішно створено!",
+        error.value = "Завдання Успішно створено!"
         error.color = "green"
 
         tasks.create_task(name_of_task.value, selected_deadline.strftime("%Y-%m-%d"), priority.value)
@@ -172,6 +172,7 @@ def main(page: ft.Page):
         content=ft.Column(
             [
                 name_of_task,
+                priority,
                 pick_btn,
                 create_btn,
                 error,
